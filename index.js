@@ -17,7 +17,12 @@ app.use(express.static('public'));
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
+  //res.json({"ipaddress":req.ip, "language":req.headers["accept-language"], "software": req.headers["user-agent"]});
 });
+
+app.get('/api/whoami', (req, res) => {
+  res.json({"ipaddress":req.ip, "language":req.headers["accept-language"], "software": req.headers["user-agent"]});
+})
 
 // your first API endpoint...
 app.get('/api/hello', function (req, res) {
@@ -25,6 +30,6 @@ app.get('/api/hello', function (req, res) {
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT || 3000, function () {
+var listener = app.listen(process.env.PORT || 8000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
